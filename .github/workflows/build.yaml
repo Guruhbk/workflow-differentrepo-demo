@@ -1,0 +1,20 @@
+name: application-build
+on:
+    push:
+        branches:
+            - main
+
+permissions:
+  contents: read
+  packages: write
+
+
+jobs:
+    docker:
+        uses: guruhbk/reusable-workflow-demo/.github/workflows/reusable-ci.yaml
+        with:
+            image_name: reusable-workflow
+            image_tag: ${{github.sha}}
+        secrets:
+            registry_username: ${{secrets.REGISTRY_USERNAME }}
+            registry_password: ${{secrets.REGISTRY_PASSWORD}}
